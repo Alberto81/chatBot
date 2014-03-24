@@ -5,15 +5,18 @@
  * @author     Michael Kölling and David J. Barnes
  * @version    0.1 (2011.07.31)
  */import java.util.Random;
+   import java.util.ArrayList;
 public class Responder
 {
     private Random aleatorio;
+    private ArrayList<String> frases;
     /**
      * Construct a Responder - nothing to do
      */
     public Responder()
     {
-        aleatorio=new Random();
+        aleatorio = new Random();
+        frases = new ArrayList<>();
         
     }
 
