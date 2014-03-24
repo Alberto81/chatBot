@@ -17,6 +17,11 @@ public class Responder
     {
         aleatorio = new Random();
         frases = new ArrayList<>();
+        frases.add("si...");
+        frases.add("That sounds interesting. Tell me more...");
+        frases.add("nuestro servicio tecnico se ocupara de todo");
+        frases.add("ha provado a reiniciar el ordenador?");
+        frases.add("desenchufe el cable y vuelvalo a enchufar");
         
     }
 
@@ -26,6 +31,7 @@ public class Responder
      */
     public String generateResponse()
     {
-        return "That sounds interesting. Tell me more...";
+        int index=aleatorio.nextInt(5);
+        return frases.get(index);
     }
 }
