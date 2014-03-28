@@ -26,11 +26,22 @@ public class InputReader
      *
      * @return  A String typed by the user.
      */
-    public String getInput()
+    public String getInputOriginal()
     {
         System.out.print("> ");         // print prompt
         String inputLine = reader.nextLine();
 
         return inputLine;
+    }
+    //ej 94
+     public String getInput()
+    {   
+        String[] salidaSplit = new String[20];
+        
+        System.out.print("> ");         // print prompt
+        String inputLine = reader.nextLine();
+         
+        salidaSplit = inputLine.split(" ");
+        return salidaSplit[0];
     }
 }
