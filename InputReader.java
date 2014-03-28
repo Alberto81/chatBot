@@ -34,7 +34,7 @@ public class InputReader
         return inputLine;
     }
     //ej 94
-     public String getInput()
+     public String getInputPrimeraPalabra()
     {   
         String[] salidaSplit = new String[20];
         
@@ -44,4 +44,23 @@ public class InputReader
         salidaSplit = inputLine.split(" ");
         return salidaSplit[0];
     }
+    public HashSet<String> getInputHS()
+    {
+        String[] salidaSplit = new String[20];
+        HashSet<String> conjunto = new HashSet<>();
+        int index = 0;
+        
+        System.out.print("> ");         // print prompt
+        String inputLine = reader.nextLine();
+        
+        salidaSplit = inputLine.split(" ");
+        
+        while (salidaSplit[index]!=null)
+        {
+        conjunto.add(salidaSplit[index]);
+        index=index+1;
+        }
+        return conjunto;
+    }
+    
 }
