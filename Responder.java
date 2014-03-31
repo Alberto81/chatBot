@@ -17,14 +17,16 @@ public class Responder
     private Random aleatorio;
     private ArrayList<String> frases;
     private HashMap<String, String> respuestas;
+
     /**
      * Construct a Responder - nothing to do
      */
     public Responder()
     {
-       
+
         aleatorio = new Random();
         frases = new ArrayList<>();
+
         frases.add("si...");
         frases.add("That sounds interesting. Tell me more...");
         frases.add("nuestro servicio tecnico se ocupara de todo");
@@ -33,7 +35,7 @@ public class Responder
         //a partir de aki es para el ejercio 92
         respuestas = new HashMap<>();
         //guardo las parejas de entrada-respuesta.
-        respuestas.put("capullo", "habla bien, que no cuesta un huevo");
+        respuestas.put ( "capullo", "habla bien, que no cuesta un huevo");
         respuestas.put("roto", "llama a un tecnico para que lo arregle, el tlf es 123 45 67 89");
         respuestas.put("garantia", "la garantia es de 2 años, si conserva el tiquet llevelo todo a la tienda");
         respuestas.put("reclamaciones", "estamos haciendo lo posible por solucionar su problema");
@@ -72,20 +74,29 @@ public class Responder
      *(92) despues de leerme bien el enunciado (la buena)
      * cambiamos el tipo de parametro de String a HashSet
      * (95)sale con la primera palabra que coincide con una key de respuestas.
+     * (96-da una misma respuesta para palabras parecidas)
      */
     public String generandoRespuesta(HashSet<String> entrada)
     {
-         it=entrada.iterator();
+        it=entrada.iterator();
         boolean encontrado = false;
         String palabra = "";
         String fraseDevuelta = "";
         while(it.hasNext() && !encontrado){
             palabra = it.next();
+            //el orden de los if es irrelevante, pues si entra en uno, no entra en el otro.
             if (respuestas.get(palabra) != null){
                 fraseDevuelta = respuestas.get(palabra);
                 encontrado = true;
             }
+
+            if(palabra.equals("tonto") || palabra.equals("anormal") || palabra.equals("estupido")){
+                fraseDevuelta = respuestas.get("capullo");
+                encontrado = true;
+            }
+
         }
+        
         if (!encontrado){
             fraseDevuelta = generateResponse();
         }
