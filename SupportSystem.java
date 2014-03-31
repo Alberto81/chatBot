@@ -1,3 +1,4 @@
+import java.util.HashSet;
 /**
  * This class implements a technical support system. It is the top
  * level class in this project. The support system communicates via
@@ -15,7 +16,7 @@ public class SupportSystem
 {
     private InputReader reader;
     private Responder responder;
-    
+
     /**
      * Creates a technical support system.
      */
@@ -37,12 +38,18 @@ public class SupportSystem
         printWelcome();
 
         while(!finished) {
-            String input = reader.getInput();
-          
-            if(input.trim().toLowerCase().equals("bye")) {
-                finished = true;
+            HashSet<String> input = reader.getInput();//tengo que modificar el metodo start para que funcione con hashSet en vez de con String
+
+            if (input.size()==1){// la salida se da solo cuando hay una sola palabra y esta es bye, pero en este caso, como que si una palabra se repite se guarda una sola vez,
+                // si ponemos bye bye, bye bye bye, bye... solo lo guarda una vez, el tamaño de input es 1 y la palabra es bye, por lo que da la salida igualmente.
+                for (String salida:input){//es lo unico que se me ocurre para trabajar con el unico string que contiene el HashSet
+                    if (salida.trim().toLowerCase().equals("bye")){// podemos ahorrarnos el .trim()
+                        finished = true;
+                    }//con un contains() dariamos la salida si cualquiera de las palabras fuera bye, pero no se como le podria aplicar el .toLowerCase()
+                }
             }
-            else {
+               //aunque se ejecute el if de arriba,si no se llega a ejecutar finished=true; devemos ejecutar el if de abajo (antes else)
+            if(!finished) {
                 String response = responder.generandoRespuesta(input);
                 System.out.println(response);
             }

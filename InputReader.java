@@ -11,7 +11,7 @@ import java.util.Scanner;
 public class InputReader
 {
     private Scanner reader;
-
+    
     /**
      * Create a new InputReader that reads text from the text terminal.
      */
@@ -26,6 +26,7 @@ public class InputReader
      *
      * @return  A String typed by the user.
      */
+   
     public String getInputOriginal()
     {
         System.out.print("> ");         // print prompt
@@ -33,34 +34,35 @@ public class InputReader
 
         return inputLine;
     }
-    //ej 94
-     public String getInputPrimeraPalabra()
+    //ej 94-1 es el getInput que devolvia solo la primera palabra
+    public String getInputPrimeraPalabra()
     {   
         String[] salidaSplit = new String[20];
-        
+
         System.out.print("> ");         // print prompt
         String inputLine = reader.nextLine();
-         
+
         salidaSplit = inputLine.split(" ");
         return salidaSplit[0];
     }
-    public HashSet<String> getInputHS()
+    //ej 94-3 este devuleve un HashSet
+    public HashSet<String> getInput()
     {
-        String[] salidaSplit = new String[20];
+        String[] salidaSplit;
         HashSet<String> conjunto = new HashSet<>();
-        int index = 0;
-        
+      
         System.out.print("> ");         // print prompt
-        String inputLine = reader.nextLine();
-        
+       String inputLine = reader.nextLine();
+
         salidaSplit = inputLine.split(" ");
-        
-        while (salidaSplit[index]!=null)
+
+        for(int index=0; index < salidaSplit.length; index++)
         {
-        conjunto.add(salidaSplit[index]);
-        index=index+1;
+            conjunto.add(salidaSplit[index]);
         }
+        
+        
         return conjunto;
     }
-    
+
 }

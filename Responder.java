@@ -1,6 +1,7 @@
 import java.util.Random;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 
 /**
  * The responder class represents a response generator object.
@@ -66,8 +67,9 @@ public class Responder
 
     /**
      *(92) despues de leerme bien el enunciado (la buena)
+     * cambiamos el tipo de parametro de String a HashSet
      */
-    public String generandoRespuesta(String entrada)
+    public String generandoRespuesta(HashSet<String> entrada)
     {
         String fraseDevuelta = respuestas.get(entrada);
         if (fraseDevuelta==null ){ //el equals no se puede utilizar cuando el valor a comparar es null (null pointer exception)
