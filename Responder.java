@@ -2,6 +2,7 @@ import java.util.Random;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 
 /**
  * The responder class represents a response generator object.
@@ -11,7 +12,8 @@ import java.util.HashSet;
  * @version    0.1 (2011.07.31)
  */
 public class Responder
-{
+{   
+    Iterator<String> it;
     private Random aleatorio;
     private ArrayList<String> frases;
     private HashMap<String, String> respuestas;
@@ -20,6 +22,7 @@ public class Responder
      */
     public Responder()
     {
+       
         aleatorio = new Random();
         frases = new ArrayList<>();
         frases.add("si...");
@@ -68,13 +71,25 @@ public class Responder
     /**
      *(92) despues de leerme bien el enunciado (la buena)
      * cambiamos el tipo de parametro de String a HashSet
+     * (95)sale con la primera palabra que coincide con una key de respuestas.
      */
     public String generandoRespuesta(HashSet<String> entrada)
     {
-        String fraseDevuelta = respuestas.get(entrada);
-        if (fraseDevuelta==null ){ //el equals no se puede utilizar cuando el valor a comparar es null (null pointer exception)
+         it=entrada.iterator();
+        boolean encontrado = false;
+        String palabra = "";
+        String fraseDevuelta = "";
+        while(it.hasNext() && !encontrado){
+            palabra = it.next();
+            if (respuestas.get(palabra) != null){
+                fraseDevuelta = respuestas.get(palabra);
+                encontrado = true;
+            }
+        }
+        if (!encontrado){
             fraseDevuelta = generateResponse();
         }
+
         return fraseDevuelta;
     }
 
