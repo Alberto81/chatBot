@@ -1,8 +1,7 @@
-import java.util.Random;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 
 /**
  * The responder class represents a response generator object.
@@ -13,10 +12,13 @@ import java.util.Iterator;
  */
 public class Responder
 {   
-    Iterator<String> it;
-    private Random aleatorio;
+    
+   
     private ArrayList<String> frases;
-    private HashMap<String, String> respuestas;
+    private HashMap<HashSet, String> respuestas;
+    private HashSet <String> conjunto1;
+    private HashSet <String> conjunto2;
+    private HashSet <String> conjunto3;
     //devemos mantener los cambios de indice en las diversas ejecuciones de los métodos, por eso no va como variable local
     //aunque al tratarse de un arraylist, podriamos borrar las frases ya dichas
     private int indice;
@@ -27,9 +29,27 @@ public class Responder
     public Responder()
     {
 
-        aleatorio = new Random();
-        frases = new ArrayList<>();
+       
 
+        conjunto1=new HashSet<>();
+        conjunto1.add("capullo");
+        conjunto1.add("tonto");
+        conjunto1.add("anormal");
+        conjunto1.add("estupido");
+
+        conjunto2=new HashSet<>();
+        conjunto2.add("roto");
+        conjunto2.add("estropeado");
+        conjunto2.add("desguazado");
+        conjunto2.add("destrozado");
+
+        conjunto3=new HashSet<>();
+        conjunto3.add("garantia");
+        conjunto3.add("gratis");
+        conjunto3.add("arreglo");
+        conjunto3.add("cambiar");
+
+        frases = new ArrayList<>();
         frases.add("no entiendo la pregunta");
         frases.add("That sounds interesting. Tell me more...");
         frases.add("nuestro servicio tecnico se ocupara de todo");
@@ -38,10 +58,10 @@ public class Responder
         //a partir de aki es para el ejercio 92
         respuestas = new HashMap<>();
         //guardo las parejas de entrada-respuesta.
-        respuestas.put ( "capullo", "habla bien, que no cuesta un huevo");
-        respuestas.put("roto", "llama a un tecnico para que lo arregle, el tlf es 123 45 67 89");
-        respuestas.put("garantia", "la garantia es de 2 años, si conserva el tiquet llevelo todo a la tienda");
-        respuestas.put("reclamaciones", "estamos haciendo lo posible por solucionar su problema");
+        respuestas.put(conjunto1, "habla bien, que no cuesta un huevo");
+        respuestas.put(conjunto2, "llama a un tecnico para que lo arregle, el tlf es 123 45 67 89");
+        respuestas.put(conjunto3, "la garantia es de 2 años, si conserva el tiquet llevelo todo a la tienda");
+
         indice=frases.size()-1;
     }
 
@@ -81,29 +101,11 @@ public class Responder
      */
     public String generandoRespuesta(HashSet<String> entrada)
     {
-        it=entrada.iterator();
-        boolean encontrado = false;
-        String palabra = "";
-        String fraseDevuelta = "";
-        while(it.hasNext() && !encontrado){
-            palabra = it.next();
-            //el orden de los if es irrelevante, pues si entra en uno, no entra en el otro.
-            if (respuestas.get(palabra) != null){
-                fraseDevuelta = respuestas.get(palabra);
-                encontrado = true;
-            }
-
-            if(palabra.equals("tonto") || palabra.equals("anormal") || palabra.equals("estupido")){
-                fraseDevuelta = respuestas.get("capullo");
-                encontrado = true;
-            }
-
+        String fraseDevuelta = respuestas.get(entrada);
+        if (fraseDevuelta == null){
+          fraseDevuelta = generateResponse();
         }
-
-        if (!encontrado){
-            fraseDevuelta = generateResponse();
-        }
-
+        
         return fraseDevuelta;
     }
 
