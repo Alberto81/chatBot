@@ -17,6 +17,9 @@ public class Responder
     private Random aleatorio;
     private ArrayList<String> frases;
     private HashMap<String, String> respuestas;
+    //devemos mantener los cambios de indice en las diversas ejecuciones de los métodos, por eso no va como variable local
+    //aunque al tratarse de un arraylist, podriamos borrar las frases ya dichas
+    private int indice;
 
     /**
      * Construct a Responder - nothing to do
@@ -27,7 +30,7 @@ public class Responder
         aleatorio = new Random();
         frases = new ArrayList<>();
 
-        frases.add("si...");
+        frases.add("no entiendo la pregunta");
         frases.add("That sounds interesting. Tell me more...");
         frases.add("nuestro servicio tecnico se ocupara de todo");
         frases.add("ha probado a reiniciar el ordenador?");
@@ -39,7 +42,7 @@ public class Responder
         respuestas.put("roto", "llama a un tecnico para que lo arregle, el tlf es 123 45 67 89");
         respuestas.put("garantia", "la garantia es de 2 años, si conserva el tiquet llevelo todo a la tienda");
         respuestas.put("reclamaciones", "estamos haciendo lo posible por solucionar su problema");
-
+        indice=frases.size()-1;
     }
 
     /**
@@ -96,7 +99,7 @@ public class Responder
             }
 
         }
-        
+
         if (!encontrado){
             fraseDevuelta = generateResponse();
         }
@@ -110,8 +113,15 @@ public class Responder
      */
     public String generateResponse()
     {
-        int index=aleatorio.nextInt(5);
-        return frases.get(index);
+        //así dara las respuestas desde el utimo indice hacia atras, sin repetir ninguno hasta llegar al 0 que se repitira siempre
+        String respuesta="";
+        if(indice==0){
+            respuesta = frases.get(indice);
+        }else{
+            respuesta = frases.get(indice);
+            indice--;
+        }
+        return respuesta;
     }
 
     //
