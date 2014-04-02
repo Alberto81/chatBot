@@ -1,4 +1,4 @@
-
+import java.util.Random;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -12,8 +12,7 @@ import java.util.HashSet;
  */
 public class Responder
 {   
-    
-   
+
     private ArrayList<String> frases;
     private HashMap<HashSet, String> respuestas;
     private HashSet <String> conjunto1;
@@ -29,7 +28,6 @@ public class Responder
     public Responder()
     {
 
-       
 
         conjunto1=new HashSet<>();
         conjunto1.add("capullo");
@@ -103,9 +101,9 @@ public class Responder
     {
         String fraseDevuelta = respuestas.get(entrada);
         if (fraseDevuelta == null){
-          fraseDevuelta = generateResponse();
+            fraseDevuelta = generateResponse();
         }
-        
+
         return fraseDevuelta;
     }
 
@@ -115,8 +113,9 @@ public class Responder
      */
     public String generateResponse()
     {
-        //así dara las respuestas desde el utimo indice hacia atras, sin repetir ninguno hasta llegar al 0 que se repitira siempre
-        String respuesta="";
+        //así dara las respuestas desde el utimo indice hacia atras, sin repetir ninguno hasta llegar al 0 que se repitira siempre.
+        //indice está como atributo.
+        String respuesta="no entiendo la pregunta";
         if(indice==0){
             respuesta = frases.get(indice);
         }else{
@@ -126,5 +125,4 @@ public class Responder
         return respuesta;
     }
 
-    //
 }
