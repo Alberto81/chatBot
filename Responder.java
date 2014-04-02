@@ -18,6 +18,7 @@ public class Responder
     private HashSet <String> conjunto1;
     private HashSet <String> conjunto2;
     private HashSet <String> conjunto3;
+    private Random aleatorio;
     //devemos mantener los cambios de indice en las diversas ejecuciones de los métodos, por eso no va como variable local
     //aunque al tratarse de un arraylist, podriamos borrar las frases ya dichas
     private int indice;
@@ -28,6 +29,8 @@ public class Responder
     public Responder()
     {
 
+        aleatorio = new Random();
+        
 
         conjunto1=new HashSet<>();
         conjunto1.add("capullo");
@@ -48,7 +51,7 @@ public class Responder
         conjunto3.add("cambiar");
 
         frases = new ArrayList<>();
-        frases.add("no entiendo la pregunta");
+        
         frases.add("That sounds interesting. Tell me more...");
         frases.add("nuestro servicio tecnico se ocupara de todo");
         frases.add("ha probado a reiniciar el ordenador?");
@@ -60,7 +63,7 @@ public class Responder
         respuestas.put(conjunto2, "llama a un tecnico para que lo arregle, el tlf es 123 45 67 89");
         respuestas.put(conjunto3, "la garantia es de 2 años, si conserva el tiquet llevelo todo a la tienda");
 
-        indice=frases.size()-1;
+        
     }
 
     /**
@@ -116,12 +119,12 @@ public class Responder
         //así dara las respuestas desde el utimo indice hacia atras, sin repetir ninguno hasta llegar al 0 que se repitira siempre.
         //indice está como atributo.
         String respuesta="no entiendo la pregunta";
-        if(indice==0){
-            respuesta = frases.get(indice);
-        }else{
-            respuesta = frases.get(indice);
-            indice--;
+        if (frases.size() > 0){
+         int index = aleatorio.nextInt(frases.size());
+         respuesta = frases.get(index);
+         frases.remove(index);
         }
+      
         return respuesta;
     }
 
